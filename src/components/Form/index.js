@@ -12,8 +12,19 @@ export default function Form(){
     const [textButton, setTextButton] = useState("Calcular IMC");
     const [errorMessage, setErrorMessage] = useState(null);
 
-    function imcCalculator(){
-        return setImc((weight/(height * height)).toFixed(2));
+    function imcCalculator(){        
+        let normalizedHeight = height;
+        let normalizedWeight = weight;
+
+        if(height.includes(",")){
+            normalizedHeight = height.replace(",", ".");
+        }
+
+        if(weight.includes(",")){
+            normalizedWeight = weight.replace(",", ".");
+        }
+
+        return setImc((normalizedWeight/(normalizedHeight * normalizedHeight)).toFixed(2));
     }
 
     function verifyImc(){
