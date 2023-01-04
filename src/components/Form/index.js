@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { View, Text, TextInput, TouchableOpacity, Vibration } from "react-native"
+import { View, Text, TextInput, TouchableOpacity, Vibration, FlatList } from "react-native"
 import ResultImc from "./ResultImc";
 import styles from "./style";
 
@@ -10,6 +10,7 @@ export default function Form(){
     const [imc, setImc] = useState(null);
     const [textButton, setTextButton] = useState("Calcular IMC");
     const [errorMessage, setErrorMessage] = useState(null);
+    const [imcList, setImcList] = useState([]);
 
     function imcCalculator(){        
         let normalizedHeight = height;
@@ -23,7 +24,12 @@ export default function Form(){
             normalizedWeight = weight.replace(",", ".");
         }
 
-        return setImc((normalizedWeight/(normalizedHeight * normalizedHeight)).toFixed(2));
+        let totalImc = (normalizedWeight/(normalizedHeight * normalizedHeight)).toFixed(2);
+        setImcList((arr) => [...arr, {
+            id: new Date().getTime(),
+            imc: totalImc
+        }]);
+        setImc(totalImc);
     }
 
     function verifyImc(){
@@ -86,6 +92,20 @@ export default function Form(){
                     </TouchableOpacity>
                 </View>
             }
+            <FlatList             
+                showsVerticalScrollIndicator
+                data={imcList.reverse()} 
+                style={styles.listImcs}
+                renderItem={({item}) => {
+                    return (
+                        <Text style={styles.resultImcItem}>
+                            <Text style={styles.textResultItemList}>Resultado IMC = </Text>
+                            {item.imc}
+                        </Text>
+                    )
+                }}
+                keyExtractor={(item) => item.id}
+            />
         </View>
     );
 }
