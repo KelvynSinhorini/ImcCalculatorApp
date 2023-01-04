@@ -2,20 +2,15 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     formContext: {
-        width: "100%",
-        height: "100%",
-        bottom: 0,
+        flex: 1,
         backgroundColor: "#FFF",
         alignItems: "center",
-        marginTop: 30,
+        paddingTop: 30,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30
     },
     form: {
-        width: "100%",
-        height: "auto",
-        marginTop: 30,
-        padding: 10
+        width: "100%"
     },
     formLabel: {
         color: "#000",
@@ -50,6 +45,10 @@ const styles = StyleSheet.create({
         color: "red",
         fontWeight: "bold",
         paddingLeft: 20
+    },
+    exibitionResultimc : {
+        width: "100%",
+        height: "50%"
     }
 });
 
